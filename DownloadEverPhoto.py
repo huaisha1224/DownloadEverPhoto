@@ -48,7 +48,7 @@ def get_download_url(access_token):
     
     # 认证信息
     url = "https://web.everphoto.cn/api/media/archive"
-    access_token = "hkNkOQeCX3iclEXd8E1mWRUz"
+    # access_token = ""
     x_uid = "64608206722716150001"
 
     # 添加请求头，并参数化
@@ -89,10 +89,9 @@ def get_download_url(access_token):
 def download_EverPhoto(url,access_token):
     # 下载时光相册的照片
     # 下载文件的URL
-    # url = "https://media.everphoto.cn/archive/download?archivetoken=Wt9_Sy6G2s7c_k4P6XPnZXmz"
 
     # 添加access_token和x_uid
-    access_token = "hkNkOQeCX3iclEXd8E1mWRUz"
+    # access_token = ""
     x_uid = "64608206722716150001"
 
     # 添加请求头，并参数化
