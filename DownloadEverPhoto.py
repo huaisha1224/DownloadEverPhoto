@@ -4,7 +4,7 @@
 import asyncio
 import time
 import os
-from pyppeteer import launch
+# from pyppeteer import launch
 import requests
 import json
 
@@ -12,12 +12,11 @@ import json
 async def main():
     """使用pyppeteer库来登录时光相册、并获取cookie
     """
-    print('~~~~ 请在弹出的网页中登录账号~~~~')
     browser = await launch(headless=False, dumpio=True, autoClose=False,
                            args=['--no-sandbox', '--window-size=1024,800', '--disable-infobars'])   # 进入有头模式
     context = await browser.createIncognitoBrowserContext() # 隐身模式
     page = await context.newPage()           # 打开新的标签页
-
+    print('~~~~ 请在弹出的网页中登录账号~~~~')
     # 访问主页、增加超时解决Navigation Timeout Exceeded: 30000 ms exceeded报错
     await page.setViewport({'width': 1024, 'height': 800})      
     await page.goto('https://web.everphoto.cn/#signin',{'timeout': 1000*60})
@@ -158,4 +157,10 @@ if __name__== "__main__":
     """
     print(exc)
     os.system('pause')
+    print(f"~~~~~~~~~~ 开始准备环境  ~~~~~~~~~~")
+    
+    # 设置 Chromium的下载地址为淘宝的国内源，解决Google源下载失败的问题
+    DEFAULT_DOWNLOAD_HOST = 'https://npm.taobao.org/mirrors'
+    os.environ["PYPPETEER_DOWNLOAD_HOST"] = DEFAULT_DOWNLOAD_HOST
+    from pyppeteer import launch
     asyncio.get_event_loop().run_until_complete(main()) #调用
